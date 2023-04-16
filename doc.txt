@@ -1,0 +1,94 @@
+Welcome to the Prime Number Math Program!
+
+Introduction:
+In this project, you will write a program that performs basic math operations using prime numbers. Your program should have functions for determining whether a given number is prime, finding the nth prime number, and performing addition, subtraction, multiplication, and division using prime numbers.
+
+Requirements:
+- You must use Java, C++, or Python for your implementation.
+- Your program must have functions for the following operations:
+    - Determining whether a given number is prime.
+    - Finding the nth prime number.
+    - Adding two prime numbers.
+    - Subtracting two prime numbers.
+    - Multiplying two prime numbers.
+    - Dividing two prime numbers.
+- The addition, subtraction, multiplication, and division functions should receive the position of the prime number as a parameter. For example, to find 5 X 7, you would enter the parameters 3 and 4 since 5 is the third prime number and 7 is the fourth prime number.
+- You should include comments in your code to explain how your functions work and what parameters they expect.
+- Your code should be well-organized and easy to read.
+
+Here's a list of the available functions:
+
+isPrime(n)
+------------------
+Determines whether a given number is prime or not.
+
+Parameters:
+n - The number to check for primality.
+
+Returns:
+True if the number is prime, false otherwise.
+
+
+nthPrime(n)
+------------------
+Finds the nth prime number.
+
+Parameters:
+n - The index of the prime number to find.
+
+Returns:
+The nth prime number.
+
+
+add(posA, posB)
+------------------
+Adds two prime numbers.
+
+Parameters:
+posA - The position of the first prime number.
+posB - The position of the second prime number.
+
+Returns:
+The sum of the two prime numbers.
+
+
+subtract(posA, posB)
+------------------
+Subtracts two prime numbers.
+
+Parameters:
+posA - The position of the first prime number.
+posB - The position of the second prime number.
+
+Returns:
+The difference between the two prime numbers.
+
+
+multiply(posA, posB)
+------------------
+Multiplies two prime numbers.
+
+Parameters:
+posA - The position of the first prime number.
+posB - The position of the second prime number.
+
+Returns:
+The product of the two prime numbers.
+
+
+divide(posA, posB)
+------------------
+Divides two prime numbers.
+
+Parameters:
+posA - The position of the first prime number.
+posB - The position of the second prime number.
+
+Returns:
+The result of dividing the first prime number by the second.
+
+Throws:
+ArithmeticException - If posB is 0 (division by zero).
+
+
+Have fun exploring the world of prime number math!
