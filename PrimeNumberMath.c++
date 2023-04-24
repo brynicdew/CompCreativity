@@ -1,66 +1,68 @@
 #include <iostream>
-#include <vector>
 #include <cmath>
 
-class PrimeNumberMath {
-public:
-    static bool isPrime(int n) {
-        if (n <= 1) {
+using namespace std;
+
+bool isPrime(int num) {
+    if (num <= 1) {
+        return false;
+    }
+    int limit = sqrt(num);
+    for (int i = 2; i <= limit; ++i) {
+        if (num % i == 0) {
             return false;
         }
+    }
+    return true;
+}
 
-        for (int i = 2; i <= std::sqrt(n); i++) {
-            if (n % i == 0) {
-                return false;
-            }
+int nthPrime(int n) {
+    int primeCount = 0;
+    int i = 2;
+    while (primeCount < n) {
+        if (isPrime(i)) {
+            primeCount++;
         }
-
-        return true;
+        i++;
     }
+    return i - 1;
+}
 
-    static int nthPrime(int n) {
-        std::vector<int> primes;
+int add(int pos1, int pos2) {
+    int prime1 = nthPrime(pos1);
+    int prime2 = nthPrime(pos2);
+    return prime1 + prime2;
+}
 
-        int current = 2;
-        while (primes.size() < n) {
-            if (isPrime(current)) {
-                primes.push_back(current);
-            }
-            current++;
-        }
+int subtract(int pos1, int pos2) {
+    int prime1 = nthPrime(pos1);
+    int prime2 = nthPrime(pos2);
+    return prime1 - prime2;
+}
 
-        return primes.back();
-    }
+int multiply(int pos1, int pos2) {
+    int prime1 = nthPrime(pos1);
+    int prime2 = nthPrime(pos2);
+    return prime1 * prime2;
+}
 
-    static int add(int n1, int n2) {
-        int prime1 = nthPrime(n1);
-        int prime2 = nthPrime(n2);
+int divide(int pos1, int pos2) {
+    int prime1 = nthPrime(pos1);
+    int prime2 = nthPrime(pos2);
+    return prime1 / prime2;
+}
 
-        return prime1 + prime2;
-    }
+int main() {
+    int pos1, pos2;
+    cout << "Enter the position of the first prime number: ";
+    cin >> pos1;
+    cout << "Enter the position of the second prime number: ";
+    cin >> pos2;
 
-    static int subtract(int n1, int n2) {
-        int prime1 = nthPrime(n1);
-        int prime2 = nthPrime(n2);
+    cout << "The sum of the prime numbers is: " << add(pos1, pos2) << endl;
+    cout << "The difference of the prime numbers is: " << subtract(pos1, pos2) << endl;
+    cout << "The product of the prime numbers is: " << multiply(pos1, pos2) << endl;
+    cout << "The quotient of the prime numbers is: " << divide(pos1, pos2) << endl;
 
-        return prime1 - prime2;
-    }
-
-    static int multiply(int n1, int n2) {
-        int prime1 = nthPrime(n1);
-        int prime2 = nthPrime(n2);
-
-        return prime1 * prime2;
-    }
-
-    static int divide(int n1, int n2) {
-        int prime1 = nthPrime(n1);
-        int prime2 = nthPrime(n2);
-
-        if (prime2 == 0) {
-            throw std::invalid_argument("Cannot divide by zero");
-        }
-
-        return prime1 / prime2;
-    }
-};
+    return 0;
+}

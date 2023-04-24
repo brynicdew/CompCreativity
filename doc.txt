@@ -16,6 +16,9 @@ Requirements:
 - You should include comments in your code to explain how your functions work and what parameters they expect.
 - Your code should be well-organized and easy to read.
 
+Extra Credit
+If you complete this assignment in Rust and use the Cargo package manager, you will receive 10 points of extra credit.
+
 Here's a list of the available functions:
 
 isPrime(n)

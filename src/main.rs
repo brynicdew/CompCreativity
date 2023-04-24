@@ -1,83 +1,75 @@
-use std::convert::TryInto;
+use std::io;
 
-pub struct PrimeNumberMath;
-
-impl PrimeNumberMath {
-    pub fn is_prime(n: i32) -> bool {
-        if n <= 1 {
+fn is_prime(n: u32) -> bool {
+    /* Return true if n is prime, else false. */
+    if n <= 1 {
+        return false;
+    }
+    let sqrt_n = (n as f64).sqrt() as u32;
+    for i in 2..=sqrt_n {
+        if n % i == 0 {
             return false;
         }
+    }
+    return true;
+}
 
-        let max_divisor = (n as f64).sqrt().floor() as i32;
-
-        for i in 2..=max_divisor {
-            if n % i == 0 {
-                return false;
+fn nth_prime(n: u32) -> u32 {
+    /* Return the nth prime number. */
+    let mut count = 0;
+    let mut i = 2;
+    loop {
+        if is_prime(i) {
+            count += 1;
+            if count == n {
+                return i;
             }
         }
-
-        true
-    }
-
-    pub fn nth_prime(n: i32) -> i32 {
-        let mut primes = Vec::new();
-        let mut current = 2;
-
-        while primes.len() < n as usize {
-            if PrimeNumberMath::is_prime(current) {
-                primes.push(current);
-            }
-
-            current += 1;
-        }
-
-        *primes.last().unwrap()
-    }
-
-    pub fn add(n1: i32, n2: i32) -> i32 {
-        let prime1 = PrimeNumberMath::nth_prime(n1);
-        let prime2 = PrimeNumberMath::nth_prime(n2);
-
-        prime1 + prime2
-    }
-
-    pub fn subtract(n1: i32, n2: i32) -> i32 {
-        let prime1 = PrimeNumberMath::nth_prime(n1);
-        let prime2 = PrimeNumberMath::nth_prime(n2);
-
-        prime1 - prime2
-    }
-
-    pub fn multiply(n1: i32, n2: i32) -> i32 {
-        let prime1 = PrimeNumberMath::nth_prime(n1);
-        let prime2 = PrimeNumberMath::nth_prime(n2);
-
-        prime1 * prime2
-    }
-
-    pub fn divide(n1: i32, n2: i32) -> i32 {
-        let prime1 = PrimeNumberMath::nth_prime(n1);
-        let prime2 = PrimeNumberMath::nth_prime(n2);
-
-        if prime2 == 0 {
-            panic!("Cannot divide by zero");
-        }
-
-        prime1 / prime2
+        i += 1;
     }
 }
 
+fn add_primes(a: u32, b: u32) -> u32 {
+    /* Return the sum of the a-th and b-th prime numbers. */
+    nth_prime(a) + nth_prime(b)
+}
+
+fn subtract_primes(a: u32, b: u32) -> u32 {
+    /* Return the difference of the a-th and b-th prime numbers. */
+    nth_prime(a) - nth_prime(b)
+}
+
+fn multiply_primes(a: u32, b: u32) -> u32 {
+    /* Return the product of the a-th and b-th prime numbers. */
+    nth_prime(a) * nth_prime(b)
+}
+
+fn divide_primes(a: u32, b: u32) -> f32 {
+    /* Return the quotient of the a-th and b-th prime numbers. */
+    nth_prime(a) as f32 / nth_prime(b) as f32
+}
+
 fn main() {
-    let n1 = 3;
-    let n2 = 4;
+    let mut a = String::new();
+    let mut b = String::new();
 
-    let sum = PrimeNumberMath::add(n1, n2);
-    let difference = PrimeNumberMath::subtract(n1, n2);
-    let product = PrimeNumberMath::multiply(n1, n2);
-    let quotient = PrimeNumberMath::divide(n1, n2);
+    println!("Enter the position of the first prime number: ");
+    io::stdin()
+        .read_line(&mut a)
+        .expect("Failed to read input.");
 
-    println!("Sum: {}", sum);
-    println!("Difference: {}", difference);
-    println!("Product: {}", product);
-    println!("Quotient: {}", quotient);
+    println!("Enter the position of the second prime number: ");
+    io::stdin()
+        .read_line(&mut b)
+        .expect("Failed to read input.");
+
+    let a: u32 = a.trim().parse().expect("Invalid input.");
+    let b: u32 = b.trim().parse().expect("Invalid input.");
+
+    println!("{}-th prime number: {}", a, nth_prime(a));
+    println!("{}-th prime number: {}", b, nth_prime(b));
+    println!("Sum: {}", add_primes(a, b));
+    println!("Difference: {}", subtract_primes(a, b));
+    println!("Product: {}", multiply_primes(a, b));
+    println!("Quotient: {}", divide_primes(a, b));
 }

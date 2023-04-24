@@ -1,56 +1,48 @@
 import math
 
-class PrimeNumberMath:
-    @staticmethod
-    def is_prime(n: int) -> bool:
-        if n <= 1:
+def is_prime(n: int) -> bool:
+    """Return True if n is prime, else False."""
+    if n <= 1:
+        return False
+    for i in range(2, int(math.sqrt(n))+1):
+        if n % i == 0:
             return False
+    return True
 
-        for i in range(2, int(math.sqrt(n)) + 1):
-            if n % i == 0:
-                return False
+def nth_prime(n: int) -> int:
+    """Return the nth prime number."""
+    count = 0
+    i = 2
+    while True:
+        if is_prime(i):
+            count += 1
+            if count == n:
+                return i
+        i += 1
 
-        return True
+def add_primes(a: int, b: int) -> int:
+    """Return the sum of the a-th and b-th prime numbers."""
+    return nth_prime(a) + nth_prime(b)
 
-    @staticmethod
-    def nth_prime(n: int) -> int:
-        primes = []
+def subtract_primes(a: int, b: int) -> int:
+    """Return the difference of the a-th and b-th prime numbers."""
+    return nth_prime(a) - nth_prime(b)
 
-        current = 2
-        while len(primes) < n:
-            if PrimeNumberMath.is_prime(current):
-                primes.append(current)
-            current += 1
+def multiply_primes(a: int, b: int) -> int:
+    """Return the product of the a-th and b-th prime numbers."""
+    return nth_prime(a) * nth_prime(b)
 
-        return primes[-1]
+def divide_primes(a: int, b: int) -> float:
+    """Return the quotient of the a-th and b-th prime numbers."""
+    return nth_prime(a) / nth_prime(b)
 
-    @staticmethod
-    def add(n1: int, n2: int) -> int:
-        prime1 = PrimeNumberMath.nth_prime(n1)
-        prime2 = PrimeNumberMath.nth_prime(n2)
-
-        return prime1 + prime2
-
-    @staticmethod
-    def subtract(n1: int, n2: int) -> int:
-        prime1 = PrimeNumberMath.nth_prime(n1)
-        prime2 = PrimeNumberMath.nth_prime(n2)
-
-        return prime1 - prime2
-
-    @staticmethod
-    def multiply(n1: int, n2: int) -> int:
-        prime1 = PrimeNumberMath.nth_prime(n1)
-        prime2 = PrimeNumberMath.nth_prime(n2)
-
-        return prime1 * prime2
-
-    @staticmethod
-    def divide(n1: int, n2: int) -> int:
-        prime1 = PrimeNumberMath.nth_prime(n1)
-        prime2 = PrimeNumberMath.nth_prime(n2)
-
-        if prime2 == 0:
-            raise ValueError("Cannot divide by zero")
-
-        return prime1 // prime2
+if __name__ == '__main__':
+    a = int(input("Enter the position of the first prime number: "))
+    b = int(input("Enter the position of the second prime number: "))
+    
+    print(f"{a}-th prime number: {nth_prime(a)}")
+    print(f"{b}-th prime number: {nth_prime(b)}")
+    print(f"Sum: {add_primes(a, b)}")
+    print(f"Difference: {subtract_primes(a, b)}")
+    print(f"Product: {multiply_primes(a, b)}")
+    print(f"Quotient: {divide_primes(a, b)}")
